@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz - Teoria da Computação</title>
+  <style>
+    body {
+      font-family: Arial;
+      margin: 40px;
+      background: #f5f5f5;
+    }
+    .question {
+      background: white;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+    }
+    .correct { color: green; }
+    .wrong { color: red; }
+    button {
+      padding: 10px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Quiz - Teoria da Computação</h1>
+
+<div id="quiz"></div>
+
+<script>
+const questions = [
+  {
+    question: "Qual a principal diferença entre Máquina de Moore e Mealy?",
+    options: [
+      "Moore depende da entrada",
+      "Mealy depende apenas do estado",
+      "Moore depende apenas do estado atual",
+      "Nenhuma diferença"
+    ],
+    answer: 2,
+    explanation: "Na máquina de Moore, a saída depende apenas do estado atual."
+  },
+  {
+    question: "Um AFD permite múltiplas transições para o mesmo símbolo?",
+    options: [
+      "Sim",
+      "Não",
+      "Depende",
+      "Apenas com epsilon"
+    ],
+    answer: 1,
+    explanation: "AFD (Determinístico) não permite mais de uma transição para o mesmo símbolo."
+  },
+  {
+    question: "Qual a complexidade de um loop que dobra o valor de i (i = i * 2)?",
+    options: [
+      "O(n)",
+      "O(n²)",
+      "O(log n)",
+      "O(1)"
+    ],
+    answer: 2,
+    explanation: "O valor cresce exponencialmente, então o número de iterações é logarítmico."
+  }
+];
+
+const quizDiv = document.getElementById("quiz");
+
+questions.forEach((q, index) => {
+  const div = document.createElement("div");
+  div.classList.add("question");
+
+  div.innerHTML = `<h3>${q.question}</h3>`;
+
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement("button");
+    btn.innerText = opt;
+
+    btn.onclick = () => {
+      const result = document.createElement("p");
+
+      if (i === q.answer) {
+        result.innerHTML = "<span class='correct'>✔ Correto!</span><br>" + q.explanation;
+      } else {
+        result.innerHTML = "<span class='wrong'>✖ Errado!</span><br>" + q.explanation;
+      }
+
+      div.appendChild(result);
+    };
+
+    div.appendChild(btn);
+    div.appendChild(document.createElement("br"));
+  });
+
+  quizDiv.appendChild(div);
+});
+</script>
+
+</body>
+</html>
